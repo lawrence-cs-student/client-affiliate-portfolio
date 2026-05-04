@@ -292,7 +292,7 @@ export default function Home() {
             {status === "error" && <p className="text-sm text-center font-semibold" style={{ color: "#FFDBAA" }}>❌ Something went wrong. Please try again.</p>}
           </form>
           <div className="mt-8 flex justify-center gap-6 text-sm" style={{ color: "#FFF0F5" }}>
-            <a href="mailto:hello@creatorname.com" className="hover:opacity-70">hello@creatorname.com</a>
+            <a href="mailto:hello@creatorname.com" className="hover:opacity-70">irishannexxx@gmail.com</a>
             <span>|</span>
             <a href="https://tiktok.com/@itsurgirlmilkshakexxx" target="_blank" rel="noopener noreferrer" className="hover:opacity-70">
               @itsurgirlmilkshakexxx
