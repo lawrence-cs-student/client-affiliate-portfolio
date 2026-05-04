@@ -1,126 +1,72 @@
 import { Geist } from "next/font/google";
+import { useState } from "react";
 
 const geist = Geist({ subsets: ["latin"] });
 
 const NAV_LINKS = [
   { label: "Home", href: "#hero" },
   { label: "About", href: "#about" },
-  { label: "Metrics", href: "#metrics" },
-  { label: "Case Studies", href: "#case-studies" },
   { label: "Portfolio", href: "#portfolio" },
   { label: "Services", href: "#services" },
   { label: "Brands", href: "#brands" },
   { label: "Contact", href: "#contact" },
 ];
 
-const METRICS = [
-  { label: "TikTok Followers", value: "250K+" },
-  { label: "Avg. Views / Video", value: "80K" },
-  { label: "Engagement Rate", value: "9.4%" },
-  { label: "Click-Through Rate", value: "7.2%" },
-  { label: "Conversion Rate", value: "4.8%" },
-  { label: "Total Revenue Generated", value: "₱1.2M+" },
-];
-
-const CASE_STUDIES = [
-  {
-    brand: "GlowSkin PH",
-    problem: "Low product awareness and stagnant online sales.",
-    action: "3-part storytelling series + honest review hook",
-    result: "180K views → 9% CTR → ₱85,000 revenue in 10 days",
-  },
-  {
-    brand: "FitFuel Supplements",
-    problem: "High cart abandonment, low TikTok presence.",
-    action: "Before/after UGC + affiliate link in bio campaign",
-    result: "220K views → 11% CTR → ₱120,000 revenue in 14 days",
-  },
-  {
-    brand: "StyleHaus PH",
-    problem: "New product launch with zero social traction.",
-    action: "Trend-jacking + product demo with strong CTA",
-    result: "95K views → 6.5% CTR → ₱48,000 revenue in 7 days",
-  },
-];
-
 const VIDEOS = [
-  {
-    id: "1",
-    caption: "Hook-driven review that hit 180K views — led to highest CTR of the month.",
-    embed: "https://www.tiktok.com/embed/v2/7000000000000000001",
-  },
-  {
-    id: "2",
-    caption: "Storytelling format — emotional connection drove 11% CTR for FitFuel.",
-    embed: "https://www.tiktok.com/embed/v2/7000000000000000002",
-  },
-  {
-    id: "3",
-    caption: "Trend-jacked product demo — 95K views in 48 hours for StyleHaus launch.",
-    embed: "https://www.tiktok.com/embed/v2/7000000000000000003",
-  },
+  { id: "1", caption: "Hook-driven review — led to highest CTR of the month.", src: "/videos/video1.mp4" },
+  { id: "2", caption: "Storytelling format — emotional connection drove strong purchase intent.", src: "/videos/video2.mp4" },
+  { id: "3", caption: "One Piece x Careline Eyeshadow Palette — creative and colourful product showcase.", src: "/videos/video3.mp4" },
+  { id: "4", caption: "Trend-jacked product demo — high views in the first 48 hours.", src: "/videos/video4.mp4" },
+  { id: "5", caption: "Authentic UGC review — high retention and strong purchase intent.", src: "/videos/video5.mp4" },
+  { id: "6", caption: "Product launch content — teaser format driving curiosity and clicks.", src: "/videos/video6.mp4" },
 ];
 
 const SERVICES = [
-  {
-    title: "Affiliate Campaigns",
-    desc: "Commission-based content that drives measurable sales through TikTok.",
-    tag: "Commission-Based",
-  },
-  {
-    title: "UGC Content Creation",
-    desc: "Raw, authentic user-generated content your brand can repurpose anywhere.",
-    tag: "Deliverable",
-  },
-  {
-    title: "Sponsored TikTok Posts",
-    desc: "Dedicated sponsored videos crafted to convert, not just entertain.",
-    tag: "Paid Partnership",
-  },
-  {
-    title: "Product Launch Campaigns",
-    desc: "Full launch strategy — teaser, reveal, and follow-up content series.",
-    tag: "Campaign",
-  },
+  { title: "Affiliate Campaigns", desc: "Commission-based content that drives measurable sales through TikTok.", tag: "Commission-Based" },
+  { title: "Sponsored TikTok Posts", desc: "Dedicated sponsored videos crafted to convert, not just entertain.", tag: "Paid Partnership" },
+  { title: "Product Launch Campaigns", desc: "Full launch strategy — teaser, reveal, and follow-up content series.", tag: "Campaign" },
 ];
 
 const PACKAGES = [
   {
     name: "Starter",
-    price: "₱5,000",
+    price: "₱1,500",
     features: ["1 TikTok video", "Affiliate link setup", "Basic performance report"],
   },
   {
     name: "Growth",
-    price: "₱12,000",
-    features: ["3 TikTok videos", "UGC content", "CTR & conversion tracking", "Story posts"],
+    price: "₱3,000",
+    features: ["3 TikTok videos", "CTR & conversion tracking", "Story posts"],
     highlight: true,
-  },
-  {
-    name: "Scale",
-    price: "₱25,000",
-    features: ["6 TikTok videos", "Full campaign strategy", "Weekly reports", "Dedicated support"],
   },
 ];
 
 const BRANDS = [
-  "GlowSkin PH", "FitFuel Supplements", "StyleHaus PH", "NaturaBrew", "TechGadgetsPH",
-];
-
-const TESTIMONIALS = [
-  {
-    name: "Maria Santos",
-    role: "Marketing Manager, GlowSkin PH",
-    quote: "She delivered beyond expectations. Our TikTok sales tripled in two weeks. Highly recommend for any beauty brand.",
-  },
-  {
-    name: "Carlo Reyes",
-    role: "Founder, FitFuel Supplements",
-    quote: "The conversion rate was insane. Real results, not just vanity metrics. Will definitely work with her again.",
-  },
+  { name: "Dove", logo: "/photos/dove.webp" },
+  { name: "Garnier", logo: "/photos/garnier.webp" },
+  { name: "Ever Bilena", logo: "/photos/ever-bilena.png" },
+  { name: "Medicube", logo: "/photos/medicube.jpeg" },
+  { name: "Cream Silk", logo: "/photos/cream-silk.jpg" },
+  { name: "Careline", logo: "/photos/careline.jpg" },
+  { name: "Maybelline", logo: "/photos/maybelline.jpg" },
+  { name: "Cosrx", logo: "/photos/cosrx.jpg" },
+  { name: "SKIN1004", logo: "/photos/skin1004.webp" },
 ];
 
 export default function Home() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("");
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setStatus("sending");
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+    setStatus(res.ok ? "success" : "error");
+  }
   return (
     <div className={geist.className} style={{ background: "#FFF0F5", color: "#3a1a2a" }}>
 
@@ -128,7 +74,7 @@ export default function Home() {
       <nav style={{ background: "#FBA1B7", position: "sticky", top: 0, zIndex: 100 }}
         className="w-full shadow-md">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <span className="font-bold text-lg" style={{ color: "#FFF0F5" }}>@creatorname</span>
+          <span className="font-bold text-lg" style={{ color: "#FFF0F5" }}>@itsurgirlmilkshakexxx</span>
           <ul className="hidden md:flex gap-6 text-sm font-medium" style={{ color: "#FFF0F5" }}>
             {NAV_LINKS.map(({ label, href }) => (
               <li key={href}>
@@ -136,8 +82,7 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <a href="#contact"
-            className="text-sm font-semibold px-4 py-2 rounded-full transition-colors"
+          <a href="#contact" className="text-sm font-semibold px-4 py-2 rounded-full"
             style={{ background: "#FFDBAA", color: "#3a1a2a" }}>
             Work With Me
           </a>
@@ -145,24 +90,24 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <section id="hero" className="min-h-screen flex items-center justify-center text-center px-6">
+      <section id="hero" className="min-h-screen flex items-center justify-center text-center px-6"
+        style={{ background: "#FFF0F5" }}>
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-widest mb-4"
-            style={{ color: "#FBA1B7" }}>TikTok Affiliate Creator</p>
+          <p className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "#FBA1B7" }}>
+            TikTok Affiliate Creator
+          </p>
           <h1 className="text-5xl font-bold leading-tight mb-6" style={{ color: "#3a1a2a" }}>
             Driving Real Sales for <span style={{ color: "#FBA1B7" }}>Beauty & Lifestyle</span> Brands
           </h1>
-          <p className="text-lg mb-8 opacity-80">
+          <p className="text-lg mb-8" style={{ color: "#5a2a3a" }}>
             I create conversion-focused TikTok content that turns viewers into buyers — not just followers.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <a href="#case-studies"
-              className="px-6 py-3 rounded-full font-semibold text-sm transition-opacity hover:opacity-80"
+            <a href="#portfolio" className="px-6 py-3 rounded-full font-semibold text-sm hover:opacity-80 transition-opacity"
               style={{ background: "#FBA1B7", color: "#FFF0F5" }}>
-              View Case Studies
+              View My Content
             </a>
-            <a href="#contact"
-              className="px-6 py-3 rounded-full font-semibold text-sm border-2 transition-opacity hover:opacity-80"
+            <a href="#contact" className="px-6 py-3 rounded-full font-semibold text-sm border-2 hover:opacity-80 transition-opacity"
               style={{ borderColor: "#FBA1B7", color: "#FBA1B7" }}>
               Work With Me
             </a>
@@ -171,94 +116,59 @@ export default function Home() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="py-24 px-6" style={{ background: "#fff5f8" }}>
+      <section id="about" className="py-24 px-6" style={{ background: "#FBA1B7" }}>
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: "#FBA1B7" }}>About Me</p>
-            <h2 className="text-3xl font-bold mb-4">Conversion-Focused, Not Just Views</h2>
-            <p className="opacity-80 mb-6">
+            <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: "#FFDBAA" }}>About Me</p>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: "#FFF0F5" }}>Conversion-Focused, Not Just Views</h2>
+            <p className="mb-6" style={{ color: "#FFF0F5" }}>
               I'm a TikTok affiliate creator specializing in beauty, skincare, and lifestyle products.
               My content is built around one goal: turning your product into a purchase decision.
             </p>
             <ul className="space-y-3 text-sm">
               {[
                 ["Niche", "Beauty, Skincare & Lifestyle"],
-                ["Audience", "18–34 y/o Filipino women, 70% female"],
-                ["Content Style", "UGC, storytelling, product demos, hooks"],
+                ["Audience", "25–34 y/o Filipino women, 80% female"],
+                ["Content Style", "storytelling, product demos, hooks"],
                 ["Positioning", "Conversion-first creator — ROI over reach"],
               ].map(([k, v]) => (
                 <li key={k} className="flex gap-2">
-                  <span className="font-semibold" style={{ color: "#FBA1B7" }}>{k}:</span>
-                  <span className="opacity-80">{v}</span>
+                  <span className="font-semibold" style={{ color: "#FFDBAA" }}>{k}:</span>
+                  <span style={{ color: "#FFF0F5" }}>{v}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl overflow-hidden h-72 flex items-center justify-center"
-            style={{ background: "#FFDBAA" }}>
-            <p className="text-sm opacity-60 font-medium">[ Creator Photo Here ]</p>
-          </div>
-        </div>
-      </section>
-
-      {/* METRICS */}
-      <section id="metrics" className="py-24 px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: "#FBA1B7" }}>Performance</p>
-          <h2 className="text-3xl font-bold mb-12">Numbers That Matter to Brands</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {METRICS.map(({ label, value }) => (
-              <div key={label} className="rounded-2xl p-6 shadow-sm"
-                style={{ background: "#fff5f8", border: "1px solid #FBA1B7" }}>
-                <p className="text-4xl font-bold mb-2" style={{ color: "#FBA1B7" }}>{value}</p>
-                <p className="text-sm opacity-70">{label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CASE STUDIES */}
-      <section id="case-studies" className="py-24 px-6" style={{ background: "#fff5f8" }}>
-        <div className="max-w-5xl mx-auto">
-          <p className="text-sm font-semibold uppercase tracking-widest mb-2 text-center" style={{ color: "#FBA1B7" }}>Proof of Results</p>
-          <h2 className="text-3xl font-bold mb-12 text-center">Case Studies</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {CASE_STUDIES.map(({ brand, problem, action, result }) => (
-              <div key={brand} className="rounded-2xl p-6 shadow-sm flex flex-col gap-3"
-                style={{ background: "#FFF0F5", border: "1px solid #FFDBAA" }}>
-                <p className="font-bold text-lg" style={{ color: "#FBA1B7" }}>{brand}</p>
-                <div>
-                  <p className="text-xs font-semibold uppercase opacity-50 mb-1">Problem</p>
-                  <p className="text-sm opacity-80">{problem}</p>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold uppercase opacity-50 mb-1">What I Did</p>
-                  <p className="text-sm opacity-80">{action}</p>
-                </div>
-                <div className="mt-auto pt-3 rounded-xl px-4 py-3 text-sm font-semibold"
-                  style={{ background: "#FFDBAA", color: "#3a1a2a" }}>
-                  🎯 {result}
-                </div>
-              </div>
-            ))}
+          <div className="rounded-2xl overflow-hidden h-72">
+            <img src="/photos/irish-photo.jpg" alt="Creator photo" className="w-full h-full object-cover" />
           </div>
         </div>
       </section>
 
       {/* PORTFOLIO */}
-      <section id="portfolio" className="py-24 px-6">
+      <section id="portfolio" className="py-24 px-6" style={{ background: "#3a1a2a" }}>
         <div className="max-w-5xl mx-auto">
-          <p className="text-sm font-semibold uppercase tracking-widest mb-2 text-center" style={{ color: "#FBA1B7" }}>Content Portfolio</p>
-          <h2 className="text-3xl font-bold mb-12 text-center">Proof of Work</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {VIDEOS.map(({ id, caption }) => (
-              <div key={id} className="flex flex-col gap-3">
-                <div className="rounded-2xl overflow-hidden h-80 flex items-center justify-center"
-                  style={{ background: "#FFDBAA" }}>
-                  <p className="text-sm opacity-60 font-medium text-center px-4">[ TikTok Video Embed {id} ]</p>
+          <div className="text-center mb-16">
+            <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
+              style={{ background: "#FBA1B7", color: "#FFF0F5" }}>Content Portfolio</span>
+            <h2 className="text-4xl font-bold mt-4" style={{ color: "#FFF0F5" }}>Proof of Work</h2>
+            <p className="mt-3 text-sm" style={{ color: "#FFDBAA" }}>
+              Real content. Real results. Every video made to convert.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {VIDEOS.map(({ id, caption, src }) => (
+              <div key={id} className="flex flex-col rounded-2xl overflow-hidden shadow-lg transition-transform hover:scale-[1.02]"
+                style={{ background: "#2a0f1a", border: "1px solid #FBA1B7" }}>
+                <div style={{ aspectRatio: "9/16" }}>
+                  <video src={src} controls className="w-full h-full object-cover" />
                 </div>
-                <p className="text-sm opacity-70 italic">{caption}</p>
+                <div className="px-4 py-3 flex flex-col gap-1">
+                  <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "#FBA1B7" }}>
+                    Video {id}
+                  </p>
+                  <p className="text-sm leading-snug" style={{ color: "#FFF0F5" }}>{caption}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -266,51 +176,55 @@ export default function Home() {
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="py-24 px-6" style={{ background: "#fff5f8" }}>
+      <section id="services" className="py-24 px-6" style={{ background: "#FBA1B7" }}>
         <div className="max-w-5xl mx-auto">
-          <p className="text-sm font-semibold uppercase tracking-widest mb-2 text-center" style={{ color: "#FBA1B7" }}>How We Work Together</p>
-          <h2 className="text-3xl font-bold mb-12 text-center">Services & Packages</h2>
+          <p className="text-sm font-semibold uppercase tracking-widest mb-2 text-center" style={{ color: "#FFDBAA" }}>How We Work Together</p>
+          <h2 className="text-3xl font-bold mb-12 text-center" style={{ color: "#FFF0F5" }}>Services & Packages</h2>
 
           <div className="grid md:grid-cols-2 gap-6 mb-16">
             {SERVICES.map(({ title, desc, tag }) => (
               <div key={title} className="rounded-2xl p-6 flex gap-4 items-start"
-                style={{ background: "#FFF0F5", border: "1px solid #FBA1B7" }}>
+                style={{ background: "rgba(255,240,245,0.15)", border: "1px solid rgba(255,255,255,0.35)" }}>
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <p className="font-bold">{title}</p>
-                    <span className="text-xs px-2 py-0.5 rounded-full font-medium"
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <p className="font-bold" style={{ color: "#FFF0F5" }}>{title}</p>
+                    <span className="text-xs px-2 py-0.5 rounded-full font-semibold"
                       style={{ background: "#FFDBAA", color: "#3a1a2a" }}>{tag}</span>
                   </div>
-                  <p className="text-sm opacity-70">{desc}</p>
+                  <p className="text-sm" style={{ color: "#FFF0F5" }}>{desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
             {PACKAGES.map(({ name, price, features, highlight }) => (
               <div key={name} className="rounded-2xl p-6 flex flex-col gap-4 shadow-sm"
                 style={{
-                  background: highlight ? "#FBA1B7" : "#FFF0F5",
-                  border: `2px solid ${highlight ? "#FBA1B7" : "#FFDBAA"}`,
-                  color: highlight ? "#FFF0F5" : "#3a1a2a",
+                  background: highlight ? "#FFF0F5" : "rgba(255,240,245,0.15)",
+                  border: `2px solid ${highlight ? "#FFDBAA" : "rgba(255,255,255,0.35)"}`,
+                  color: highlight ? "#3a1a2a" : "#FFF0F5",
                 }}>
+                {highlight && (
+                  <span className="text-xs font-bold uppercase tracking-widest self-start px-2 py-0.5 rounded-full"
+                    style={{ background: "#FBA1B7", color: "#FFF0F5" }}>Most Popular</span>
+                )}
                 <p className="font-bold text-lg">{name}</p>
-                <p className="text-3xl font-bold">{price}</p>
+                <p className="text-3xl font-bold" style={{ color: highlight ? "#FBA1B7" : "#FFDBAA" }}>{price}</p>
                 <ul className="space-y-2 text-sm flex-1">
                   {features.map(f => (
-                    <li key={f} className="flex gap-2 items-start">
-                      <span>✓</span> {f}
+                    <li key={f} className="flex gap-2 items-center">
+                      <span style={{ color: highlight ? "#FBA1B7" : "#FFDBAA" }}>✓</span> {f}
                     </li>
                   ))}
                 </ul>
                 <a href="#contact"
-                  className="text-center text-sm font-semibold px-4 py-2 rounded-full transition-opacity hover:opacity-80"
+                  className="text-center text-sm font-bold px-4 py-2 rounded-full hover:opacity-80 transition-opacity"
                   style={{
-                    background: highlight ? "#FFF0F5" : "#FBA1B7",
-                    color: highlight ? "#FBA1B7" : "#FFF0F5",
+                    background: highlight ? "#FBA1B7" : "#FFF0F5",
+                    color: highlight ? "#FFF0F5" : "#FBA1B7",
                   }}>
-                  Get Started
+                  Get Started →
                 </a>
               </div>
             ))}
@@ -318,26 +232,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BRANDS & TESTIMONIALS */}
-      <section id="brands" className="py-24 px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: "#FBA1B7" }}>Social Proof</p>
-          <h2 className="text-3xl font-bold mb-10">Brands I've Worked With</h2>
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
-            {BRANDS.map(brand => (
-              <span key={brand} className="px-5 py-2 rounded-full text-sm font-semibold"
-                style={{ background: "#FFDBAA", color: "#3a1a2a" }}>
-                {brand}
-              </span>
-            ))}
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {TESTIMONIALS.map(({ name, role, quote }) => (
-              <div key={name} className="rounded-2xl p-6 text-left"
-                style={{ background: "#fff5f8", border: "1px solid #FBA1B7" }}>
-                <p className="text-sm opacity-80 italic mb-4">"{quote}"</p>
-                <p className="font-bold text-sm">{name}</p>
-                <p className="text-xs opacity-60">{role}</p>
+      {/* BRANDS */}
+      <section id="brands" className="py-24 px-6" style={{ background: "#FFF0F5" }}>
+        <div className="max-w-6xl mx-auto text-center">
+          <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
+            style={{ background: "#FFDBAA", color: "#3a1a2a" }}>Social Proof</span>
+          <h2 className="text-3xl font-bold mt-4 mb-3" style={{ color: "#3a1a2a" }}>Brands I've Worked With</h2>
+          <p className="text-sm mb-14" style={{ color: "#5a2a3a" }}>Trusted by beauty and lifestyle brands to deliver real results.</p>
+          <div className="flex flex-wrap justify-center gap-10">
+            {BRANDS.map(({ name, logo }) => (
+              <div key={name} className="flex flex-col items-center gap-3 group">
+                <div className="rounded-full overflow-hidden shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl"
+                  style={{ width: "90px", height: "90px", border: "4px solid #FBA1B7", outline: "4px solid #FFDBAA", outlineOffset: "3px" }}>
+                  <img src={logo} alt={name} className="w-full h-full object-cover" />
+                </div>
+                <p className="text-sm font-semibold" style={{ color: "#FBA1B7" }}>{name}</p>
               </div>
             ))}
           </div>
@@ -349,43 +258,52 @@ export default function Home() {
         <div className="max-w-xl mx-auto text-center">
           <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: "#FFDBAA" }}>Let's Collaborate</p>
           <h2 className="text-3xl font-bold mb-4" style={{ color: "#FFF0F5" }}>Let's Scale Your TikTok Sales</h2>
-          <p className="mb-8 opacity-80" style={{ color: "#FFF0F5" }}>
+          <p className="mb-8" style={{ color: "#FFF0F5" }}>
             Ready to turn your product into a TikTok bestseller? Reach out and let's talk.
           </p>
-          <form className="flex flex-col gap-4 text-left">
+          <form className="flex flex-col gap-4 text-left" onSubmit={handleSubmit}>
             {[
-              { id: "name", label: "Your Name", type: "text", placeholder: "Brand / Company Name" },
+              { id: "name", label: "Brand / Company Name", type: "text", placeholder: "e.g. GlowSkin PH" },
               { id: "email", label: "Email Address", type: "email", placeholder: "hello@yourbrand.com" },
             ].map(({ id, label, type, placeholder }) => (
               <div key={id}>
-                <label htmlFor={id} className="block text-sm font-medium mb-1" style={{ color: "#FFF0F5" }}>{label}</label>
-                <input id={id} type={type} placeholder={placeholder}
+                <label htmlFor={id} className="block text-sm font-semibold mb-1" style={{ color: "#FFF0F5" }}>{label}</label>
+                <input id={id} type={type} placeholder={placeholder} required
+                  value={form[id]}
+                  onChange={e => setForm(f => ({ ...f, [id]: e.target.value }))}
                   className="w-full rounded-xl px-4 py-3 text-sm outline-none"
                   style={{ background: "#FFF0F5", color: "#3a1a2a" }} />
               </div>
             ))}
             <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-1" style={{ color: "#FFF0F5" }}>Message</label>
-              <textarea id="message" rows={4} placeholder="Tell me about your product and campaign goals..."
+              <label htmlFor="message" className="block text-sm font-semibold mb-1" style={{ color: "#FFF0F5" }}>Message</label>
+              <textarea id="message" rows={4} placeholder="Tell me about your product and campaign goals..." required
+                value={form.message}
+                onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                 className="w-full rounded-xl px-4 py-3 text-sm outline-none resize-none"
                 style={{ background: "#FFF0F5", color: "#3a1a2a" }} />
             </div>
-            <button type="submit"
-              className="w-full py-3 rounded-full font-semibold text-sm transition-opacity hover:opacity-80"
+            <button type="submit" disabled={status === "sending"}
+              className="w-full py-3 rounded-full font-bold text-sm hover:opacity-80 transition-opacity disabled:opacity-50"
               style={{ background: "#FFDBAA", color: "#3a1a2a" }}>
-              Start Your Affiliate Campaign →
+              {status === "sending" ? "Sending..." : "Start Your Affiliate Campaign →"}
             </button>
+            {status === "success" && <p className="text-sm text-center font-semibold" style={{ color: "#FFF0F5" }}>✅ Message sent! I'll get back to you soon.</p>}
+            {status === "error" && <p className="text-sm text-center font-semibold" style={{ color: "#FFDBAA" }}>❌ Something went wrong. Please try again.</p>}
           </form>
           <div className="mt-8 flex justify-center gap-6 text-sm" style={{ color: "#FFF0F5" }}>
             <a href="mailto:hello@creatorname.com" className="hover:opacity-70">hello@creatorname.com</a>
             <span>|</span>
-            <a href="https://tiktok.com/@creatorname" target="_blank" rel="noopener noreferrer" className="hover:opacity-70">@creatorname</a>
+            <a href="https://tiktok.com/@itsurgirlmilkshakexxx" target="_blank" rel="noopener noreferrer" className="hover:opacity-70">
+              @itsurgirlmilkshakexxx
+            </a>
           </div>
         </div>
       </section>
 
-      <footer className="py-6 text-center text-xs opacity-50" style={{ background: "#FBA1B7", color: "#FFF0F5" }}>
-        © {new Date().getFullYear()} @creatorname · TikTok Affiliate Creator
+      <footer className="py-8 text-center" style={{ background: "#3a1a2a" }}>
+        <p className="text-sm font-semibold mb-1" style={{ color: "#FBA1B7" }}>@itsurgirlmilkshakexxx</p>
+        <p className="text-xs" style={{ color: "rgba(255,219,170,0.7)" }}>© {new Date().getFullYear()} · TikTok Affiliate Creator · Made with 🩷</p>
       </footer>
     </div>
   );
