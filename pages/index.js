@@ -18,7 +18,9 @@ const VIDEOS = [
   { id: "3", caption: "One Piece x Careline Eyeshadow Palette — creative and colourful product showcase.", src: "/videos/video3.mp4" },
   { id: "4", caption: "Trend-jacked product demo — high views in the first 48 hours.", src: "/videos/video4.mp4" },
   { id: "5", caption: "Authentic UGC review — high retention and strong purchase intent.", src: "/videos/video5.mp4" },
-  { id: "6", caption: "Product launch content — teaser format driving curiosity and clicks.", src: "/videos/video6.mp4" },
+  { id: "6", caption: "Produced food content for this limited time offer and focused on crave-worthy close ups, and kitchen action to show the real preparations", src: "/videos/video6.mp4" },
+  { id: "7", caption: "Seven107Market Launch | Shot event coverage to hype the new drop of Moringa Soap.", src: "/videos/video7.mp4" },
+  { id: "8", caption: "Captured the energy of Bioten's booth launch at Beautycon 2026.", src: "/videos/video8.mp4" },
 ];
 
 const SERVICES = [
@@ -38,6 +40,11 @@ const PACKAGES = [
     price: "₱3,000",
     features: ["3 TikTok videos", "CTR & conversion tracking", "Story posts"],
     highlight: true,
+  },
+  {
+    name: "Event",
+    price: "₱2,500",
+    features: ["Product Launch and Beauty Event", "4-6 hours", "1 video about the event"],
   },
 ];
 
@@ -197,7 +204,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {PACKAGES.map(({ name, price, features, highlight }) => (
               <div key={name} className="rounded-2xl p-6 flex flex-col gap-4 shadow-sm"
                 style={{
@@ -291,11 +298,47 @@ export default function Home() {
             {status === "success" && <p className="text-sm text-center font-semibold" style={{ color: "#FFF0F5" }}>✅ Message sent! I'll get back to you soon.</p>}
             {status === "error" && <p className="text-sm text-center font-semibold" style={{ color: "#FFDBAA" }}>❌ Something went wrong. Please try again.</p>}
           </form>
-          <div className="mt-8 flex justify-center gap-6 text-sm" style={{ color: "#FFF0F5" }}>
-            <a href="mailto:hello@creatorname.com" className="hover:opacity-70">irishannexxx@gmail.com</a>
+          <div className="mt-6 flex justify-center gap-6 text-sm" style={{ color: "#FFF0F5" }}>
+            <a href="mailto:irishannexxx@gmail.com" className="hover:opacity-70">irishannexxx@gmail.com</a>
             <span>|</span>
             <a href="https://tiktok.com/@itsurgirlmilkshakexxx" target="_blank" rel="noopener noreferrer" className="hover:opacity-70">
               @itsurgirlmilkshakexxx
+            </a>
+          </div>
+
+          <div className="mt-6 grid grid-cols-2 gap-4">
+            <p className="col-span-2 text-sm font-semibold text-center mb-1" style={{ color: "#FFF0F5" }}>Or reach me through</p>
+            <a href="https://www.instagram.com/itsurgirlmilkshakex/" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-3 rounded-2xl px-4 py-4 transition-transform hover:scale-105 shadow-md"
+              style={{ background: "#FFF0F5", color: "#3a1a2a" }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#f09433" />
+                    <stop offset="50%" stopColor="#dc2743" />
+                    <stop offset="100%" stopColor="#bc1888" />
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig-grad)" strokeWidth="2" fill="none"/>
+                <circle cx="12" cy="12" r="4" stroke="url(#ig-grad)" strokeWidth="2" fill="none"/>
+                <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig-grad)"/>
+              </svg>
+              <div className="text-left">
+                <p className="font-bold text-sm">Instagram</p>
+                <p className="text-xs" style={{ color: "#5a2a3a" }}>@itsurgirlmilkshakex</p>
+              </div>
+            </a>
+
+            <a href="viber://chat?number=+639397946806"
+              className="flex items-center gap-3 rounded-2xl px-4 py-4 transition-transform hover:scale-105 shadow-md"
+              style={{ background: "#FFF0F5", color: "#3a1a2a" }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="#7360f2" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.09-1.35A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm4.64 13.17c-.2.56-.99 1.03-1.62 1.16-.43.09-.99.16-2.88-.62-2.42-1-3.97-3.46-4.09-3.62-.12-.16-.97-1.29-.97-2.46 0-1.17.61-1.74.83-1.98.22-.24.48-.3.64-.3h.46c.15 0 .35-.06.55.42.2.49.69 1.69.75 1.81.06.12.1.27.02.43-.08.16-.12.26-.24.4-.12.14-.25.31-.36.42-.12.12-.24.25-.1.49.14.24.61.99 1.31 1.6.9.8 1.66 1.05 1.9 1.17.24.12.38.1.52-.06.14-.16.59-.69.75-.93.16-.24.32-.2.54-.12.22.08 1.4.66 1.64.78.24.12.4.18.46.28.06.1.06.56-.14 1.12z"/>
+              </svg>
+              <div className="text-left">
+                <p className="font-bold text-sm">Viber</p>
+                <p className="text-xs" style={{ color: "#5a2a3a" }}>09397946806</p>
+              </div>
             </a>
           </div>
         </div>
